@@ -1,0 +1,1400 @@
+console.log(2 + '2'); // 22
+console.log(2 - '2'); // 0
+---------------------------------------------------
+let nums = [1, 2, 2, 4];
+console.log([... new Set(nums)]); // [1, 2, 3]
+---------------------------------------------------
+
+let func = function(){
+
+	{
+		let l = 'let';
+		var v = 'var';
+	}
+
+	{
+		(function(){
+			let l = 'let';
+			var v = 'var';
+		})(); // both err
+		
+	}
+
+	console.log(v); // var
+	console.log(l); // reference err: l not defined
+
+}
+----------------------------------------------------
+console.log(5 < 6 < 7); // true
+console.log(7 > 6 > 5); // false
+
+console.log(("B" + "A" + +"A" + "A").toLowerCase()); // "banana"
+----------------------------------------------------
+let a = function(){ return arguments}; // hi
+console.log(a('hi'));
+
+-----------------------------------------------------
+let a = () => { return arguments}; // no as arguments doesnot bind with arrow functions
+let a = (...n) => { return n}; // hi
+console.log(a('hi'));
+-------------------------------------------------------
+
+let data = {
+	name: 'Kevin'
+};
+
+data.age = 25;
+console.log(data); // name & age
+
+Object.freeze(data); // no update to data : prevent user from adding new properties / changing 
+
+data.name = 'Sabir' // doest allow to change cause of freeze
+
+Object.seal(data); // doest allow new prop but can change existing prop
+
+Object.defineProperty(data, ' age',{
+	value :3,
+	writable: false
+});
+
+------------------------------------------------------------
+
+const arr = [1, 2, 12, 30, 5, 45, 7]
+console.log(arr.sort()); // [1, 12, 2, 30, 45, 5, 7] // sort as string
+
+console.log(arr.sort((a, b) => { 
+	return a<b;
+})); // sorted
+
+----------------------------------------------------------
+
+let i = Number.MIN_VALUE;
+
+console.log(i); 
+console.log(i * i); // 0
+console.log(i + i); // 1
+console.log(i - i); // -1
+console.log(i / i); // 1
+
+-------------------------------------------------------------
+let x = [1, 2, 3] + [4, 5, 6]
+console.log(x); //  "1, 2, 34, 5, 6"
+
+[...[1,2,3], ...[4,5,6]];
+String([...[1,2,3], ...[4,5,6]])
+-------------------------------------------------------------
+
+console.log(555555555555555555) // 18'5
+console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991 = 16 digit
+
+---------------------------------------------------------------
+
+(function(){
+	let a = b = 100; 
+})()
+
+console.log(b); // 100 //  as b is global
+console.log(a); // not defined
+
+--------------------------------------------------------------
+
+console.log([] + []); // empty string
+
+
+--------------------------------------------------------
+
+function a(){
+	return 'hello';
+}
+
+const word = a `hi`; // behave as arg
+console.log(word); // 
+
+---------------------------------------------------------
+
+<div contenteditable="true"> Hello </div>
+
+----------------------------------------------------------
+
+const x = 'constructor';
+console.log(x[x](01)); //1 as x[x] == String function
+
+-------------------------------------------------------
+
+console.log(0.1 + 0.2) // 0.000000034
+
+-----------------------------------------------------
+
+console.log(('hi').__proto__.__proto__.__proto__); // 1st: String , 2nd : Object , 3rd: Null
+
+---------------------------------------------------
+
+let x = function(){
+	return [].slice.call(arguments).length;
+}
+
+console.log(x(1,2,3,4,5)); // 5
+
+-----------------------------------------------------
+
+function funcDeclaration(){
+	console.log('Function Declaration');
+}
+
+let FunctionExpression  = function(){
+	console.log('Function expression');
+}
+--------------------------------------------------------
+// one number missing in array:
+let n = arr.length;
+let toatal = n*(n+1)/2;
+let arrayTotal = arr.reduce((t,i) => t+i);
+console.log(total-arrToatal);
+
+----------------------------------------------------------
+
+let str = 'i love javascript';
+
+// tpircesavaj evol i
+// javascript love i : with space
+
+let rts = str.split("").reverse().join("");
+
+------------------------------------------------
+
+let x = {
+	a(){
+		return this;
+	},
+	b(){
+		return this;
+	}
+};
+
+x.a().b().a().a();
+
+------------------------------------------------
+
+for (var i =0;i < 3; i++){
+	setTimeout(()=>console.log(i),1);
+} // 3 3 3 : if let :  0 1 2
+
+// using clouser:
+for (var i =0; i< 3; i++){
+	function inner(i){
+	setTimeout(function log(){
+		console.log(i)
+	}, i * 1000)
+	}
+	inner(i)
+} // 0 1 2
+--------------------------------------------------------
+
+console.log(!"Sabir");
+---------------------------------------------------
+
+const person = { name : 'Employee'};
+
+function sayHi(age){
+	return `${this.name} is ${age}`
+}
+
+console.log(sayHi.call(person, 25)) // name and age
+console.log(sayHi.bind(person, 25)) // function
+
+---------------------------------------------------
+
+const num = [1,2,3];
+num[9] = 11;
+console.log(num); // [1,2,3,empty x 6 , 11]
+---------------------------------------------------
+
+const num = [1,2,3]
+num[3] = num;
+console.log(num) // infinite array
+----------------------------------------------
+console.log(typeof 3 + 4 + '5') // number45
+
+console.log(typeof (3 + 4 + +'5')) // number
+
+console.log( [] == []) // false
+--------------------------------------------------
+
+(() => {
+	let x = (y =10);
+})();
+
+console.log(typeof x) // undefined
+
+
+(() => {
+	let x = y =10;
+})();
+
+console.log(typeof x) // number
+--------------------------------------------------
+
+let x =100;
+(()=>{
+	var x = 20;
+})();
+
+console.log(x) // 100
+---------------------------------------------
+const data = ["Peter","John","kevin"];
+const [x] = data;
+console.log(x); // peter
+--------------------------------------------
+
+const name = "Javascript";
+console.log(!typeof name === 'object') // false : 1st !, 2nd ===
+console.log(!typeof name === 'string') // false
+-----------------------------------------------
+let data = ["Object","Array","String"];
+delete data[1];
+console.log(data)// ["Object",empty,"String"]
+---------------------------------------------
+let a =2;
+setTimeout(()=>{
+	console.log(a) // 100
+},0)
+a=100
+----------------------------------------------
+let x = 10;
+x = (x+=20,x)//30
+x = (x+=20,5) // 5
+console.log(x);
+
+------------------------------------------------
+
+let x = 20, y = 30;
+[x,y] = [y,x]
+console.log(x,y) // 30 ,20
+
+-------------------------------------------------
+
+let obj = {
+	name: 'Javascript,
+	10: 'this is a no'
+} // only string
+
+let data =  new Map([['name','javascript'],[10, 'this is a no']]) // any data type can be stored
+
+console.log(obj.name, obj.10) // ? // obj.get(10); , obj.set(Azam), obj.has(prop)
+
+------------------------------------------------
+Javascript generator
+-----------------------------------------------------------------
+
+__proto__ and prototype :
+
+let users = {
+	getFullName: function(){
+		return this.name + " " + this.lastName;
+	},
+	getAge: function(){
+		let age = new Date().getFullYear() - this.birth;
+		return age;
+	}
+}
+
+let student = {
+	name: 'John',
+	lastName: 'Doe',
+	birth: 2000,
+}
+
+let teacher = {
+	name: 'Ritesh',
+	lastName: 'Sharma',
+	birth: 1980,
+	// getAge: users.getAge;
+}
+
+teacher.__proto__ = users;
+student.__proto__ = users;
+
+console.log(student.getAge())
+
+
+Object.prototype.data = "this is accessed by all";
+
+String.prototype.data = "this is also  accessed by all";
+
+String.prototype.dataLength =function(){
+	return this.length + 2;
+}
+
+---------------------------------------------------
+
+shallow copy:
+ 
+let obj = {
+	name : 'JS'
+};
+
+let user = obj; // reference copy // memory copy
+user.name = 'JAvascript';
+
+console.log(obj); // JAvascript
+
+
+let user = Object.assign({},obj); // no chage to original obj // {...obj}
+
+Deep copy: // multilevel object
+
+let obj = {
+	name : 'JS',
+	address: {
+		city: "Cuttack",
+		state: "Odisha"
+	},
+	getData: function(){
+		return "data"
+	},
+    getDate: function(){
+        return new Date()
+    }
+};
+
+let user = JSON.parse(JSON.stringify(obj)) ; // deep clone
+user.address.city = "Delhi";
+console.log(obj); // original object remains unchanged
+console.log(user); // cloned object with modified city
+console.log(obj.name); // original name
+console.log(user.name); // cloned name
+console.log(obj.address.city); // original city
+console.log(user.address.city); // cloned city
+console.log(obj.getData()); // data
+console.log(user.getData()); // TypeError: user.getData is not a function
+console.log(obj.getDate()); // current date
+console.log(user.getDate()); // TypeError: user.getDate is not a function
+
+// The methods are not cloned because JSON.stringify converts functions to undefined, 
+and JSON.parse ignores them.
+
+Use lodash method for deepClone: _.cloneDeep(obj);
+
+------------------------------------------------------
+let user = {}
+for (let item in user){
+	console.log(item, user[item])
+}
+let user = {
+    name: 'Sanket',
+    age: 30,
+    city: 'Pune'
+}
+for (let item in user){
+	console.log(item, user[item])
+}
+name Sanket
+age 30
+city Pune
+-----------------------------------------------------
+private variable and fucntion can be access within class not outside:
+
+class BankAccount{
+	name = "JS";
+	#pin = 226622;
+
+	getName(){
+		return this.name;
+	}
+
+	#getIFSCCode(){
+		return "775544";
+	}
+
+	getSpecialDetails(){
+		return{
+			pin: this.#pin,
+			name: this.name,
+			ifsc: this.#getIFSCCode()
+		}
+	}
+}
+
+const details = new BankAccount();
+console.log(details.getSpecialDetails());
+------------------------------------------------------------
+
+// Example of each OOPs concept separately
+
+// Encapsulation
+class BankAccount {
+    #balance; // private field
+
+    constructor(initialBalance) {
+        this.#balance = initialBalance;
+    }
+
+    deposit(amount) {
+        if (amount > 0) {
+            this.#balance += amount;
+        }
+    }
+
+    withdraw(amount) {
+        if (amount > 0 && amount <= this.#balance) {
+            this.#balance -= amount;
+        }
+    }
+
+    getBalance() {
+        return this.#balance;
+    }
+}
+
+const account = new BankAccount(1000);
+account.deposit(500);
+account.withdraw(200);
+console.log(account.getBalance()); // 1300
+// console.log(account.#balance); // Error: Private field '#balance' must be declared in an enclosing class
+
+// Inheritance
+class Vehicle {
+    #type; // private field
+
+    constructor(type) {
+        this.#type = type;
+    }
+
+    describe() {
+        return `This is a ${this.#type}.`;
+    }
+}
+
+class Car extends Vehicle {
+    #brand; // private field
+
+    constructor(brand) {
+        super('Car');
+        this.#brand = brand;
+    }
+
+    getDetails() {
+        return `${this.describe()} It is a ${this.#brand}.`;
+    }
+}
+
+const myCar = new Car('Toyota');
+console.log(myCar.getDetails()); // This is a Car. It is a Toyota.
+// console.log(myCar.#type); // Error: Private field '#type' must be declared in an enclosing class
+// console.log(myCar.#brand); // Error: Private field '#brand' must be declared in an enclosing class
+
+// Polymorphism
+class Shape {
+    #name; // private field
+
+    constructor(name) {
+        this.#name = name;
+    }
+
+    area() {
+        return 0;
+    }
+
+    describe() {
+        return `This is a ${this.#name}.`;
+    }
+}
+
+class Circle extends Shape {
+    #radius; // private field
+
+    constructor(radius) {
+        super('Circle');
+        this.#radius = radius;
+    }
+
+    area() {
+        return Math.PI * this.#radius * this.#radius;
+    }
+}
+
+class Square extends Shape {
+    #side; // private field
+
+    constructor(side) {
+        super('Square');
+        this.#side = side;
+    }
+
+    area() {
+        return this.#side * this.#side;
+    }
+}
+
+const shapes = [new Circle(5), new Square(4)];
+shapes.forEach(shape => {
+    console.log(shape.describe());
+    console.log(`Area: ${shape.area()}`);
+});
+// console.log(shapes[0].#name); // Error: Private field '#name' must be declared in an enclosing class
+// console.log(shapes[0].#radius); // Error: Private field '#radius' must be declared in an enclosing class
+// console.log(shapes[1].#side); // Error: Private field '#side' must be declared in an enclosing class
+
+// Abstraction
+class Library {
+    #books; // private field
+
+    constructor() {
+        this.#books = [];
+    }
+
+    #findBook(title) { // private method
+        return this.#books.find(book => book.title === title);
+    }
+
+    addBook(book) {
+        if (!this.#findBook(book.title)) {
+            this.#books.push(book);
+        }
+    }
+
+    removeBook(title) {
+        this.#books = this.#books.filter(book => book.title !== title);
+    }
+
+    listBooks() {
+        return this.#books;
+    }
+}
+const library = new Library();
+library.addBook({ title: '1984', author: 'George Orwell' });
+library.addBook({ title: 'To Kill a Mockingbird', author: 'Harper Lee' });
+console.log(library.listBooks());
+library.removeBook('1984');
+console.log(library.listBooks());
+// console.log(library.#books); // Error: Private field '#books' must be declared in an enclosing class
+// console.log(library.#findBook('1984')); // Error: Private field '#findBook' must be declared in an enclosing class
+
+// Note: In each example, private fields and methods ensure that internal state and behavior are hidden from outside access, demonstrating encapsulation and abstraction. Inheritance and polymorphism are also illustrated in their respective examples.
+
+// All OOPs concepts together with private fields and methods
+class Company {
+    #name; // private field
+    #employees; // private field
+
+    constructor(name) {
+        this.#name = name;
+        this.#employees = [];
+    }
+
+    #findEmployee(id) { // private method
+        return this.#employees.find(emp => emp.id === id);
+    }
+
+    addEmployee(employee) {
+        if (!this.#findEmployee(employee.id)) {
+            this.#employees.push(employee);
+        }
+    }
+
+    removeEmployee(id) {
+        this.#employees = this.#employees.filter(emp => emp.id !== id);
+    }
+
+    listEmployees() {
+        return this.#employees;
+    }
+}
+
+class Manager extends Company {
+    #department; // private field
+
+    constructor(name, department) {
+        super(name);
+        this.#department = department;
+    }
+
+    getDepartment() {
+        return this.#department;
+    }
+}
+const myCompany = new Manager('TechCorp', 'Development');
+myCompany.addEmployee({ id: 1, name: 'Alice' });
+myCompany.addEmployee({ id: 2, name: 'Bob' }); 
+console.log(myCompany.listEmployees());
+console.log(myCompany.getDepartment());
+myCompany.removeEmployee(1);
+console.log(myCompany.listEmployees());
+// console.log(myCompany.#name); // Error: Private field '#name' must be declared in an enclosing class
+// console.log(myCompany.#employees); // Error: Private field '#employees' must be declared in an enclosing class
+// console.log(myCompany.#findEmployee(2)); // Error: Private field '#findEmployee' must be declared in an enclosing class
+// console.log(myCompany.#department); // Error: Private field '#department' must be declared in an enclosing class
+
+// Note: This final example combines all OOP concepts with private fields and methods, demonstrating encapsulation, inheritance, polymorphism, and abstraction in a single cohesive example.
+
+// Abstract class and methods are not natively supported in JavaScript, but we can simulate them using ES6 classes. Here's how you can create an abstract class and methods:
+
+class AbstractAnimal {
+    constructor() {
+        if (new.target === AbstractAnimal) {
+            throw new TypeError("Cannot construct AbstractAnimal instances directly");
+        }
+    }
+
+    makeSound() {
+        throw new Error("Method 'makeSound()' must be implemented.");
+    }
+}
+
+class Dog extends AbstractAnimal {
+    makeSound() {
+        return "Woof!";
+    }
+}
+
+class Cat extends AbstractAnimal {
+    makeSound() {
+        return "Meow!";
+    }
+}
+
+const myDog11 = new Dog();
+console.log(myDog1.makeSound()); // Woof!
+
+const myCat = new Cat();
+console.log(myCat.makeSound()); // Meow!
+
+// const myAnimal = new AbstractAnimal(); // Error: Cannot construct AbstractAnimal instances directly
+// myAnimal.makeSound(); // Error: Method 'makeSound()' must be implemented.
+
+// In this example, `AbstractAnimal` is an abstract class that cannot be instantiated directly. It contains an abstract method `makeSound()` that must be implemented by any subclass. The `Dog` and `Cat` classes extend `AbstractAnimal` and provide their own implementations of the `makeSound()` method. Attempting to create an instance of `AbstractAnimal` or calling `makeSound()` on it will result in an error, enforcing the abstraction principle.
+
+
+------------------------------------------------------------
+
+let dtata = [3,5,6,7,3,4];
+
+console.log(dtata.at(-2))
+
+-----------------------------------------------------------
+Nullish coalescing operator:
+
+let user = {
+	student:{
+		name: '',
+		age: 0
+	}
+}
+
+console.log(user.student.name || 'unknown');
+
+console.log(user.student.age || "under Age");
+
+
+console.log(user.student.name ?? 'unknown'); // only check for null and undefined
+
+console.log(user.student.age ?? "under Age");
+
+-----------------------------------------------------------
+HOF:
+function test(){
+	return 1+2;
+}
+
+function hello(x){
+	let data = function(){
+		return "HOF";
+	}
+	return data;
+}
+
+hello(test);
+
+------------------------------------------------------
+
+let data = 10;
+Number.prototype.customfun = function(x){
+	return x(this);
+}
+let result = data.customFunc((x)=> x+x);
+console.log(result)
+-----------------------------------------
+
+window = this = self = globalThis
+
+-----------------------------------------------------------
+
+function test(){
+	var a = "Hello";
+	let b = "Bye";
+
+	if( true){
+		let a = "Hi";
+		var b = "GoodBye" // err: already declared
+	}
+}
+
+test();
+
+------------------------------------------------------
+time bet declaration and initialization of let and const : script/filename
+
+function abc(){
+console.log(a,b,c);
+	const c = 30;
+	let b = 20;
+	var a = 10;
+}
+abc();
+
+--------------------------------------------------
+
+map:
+
+const nums = [1,2,3,4];
+const mul = nums.map((num)=>{
+	return num * 3 + i;
+});
+
+console.log(mul); // new arr
+
+filter:
+
+const morethantwo = nums.filter((num) =>{
+	return num > 2;
+})
+console.log(morethantwo);
+
+reduce:
+
+const sum = nums.reduce((acc,curr)=>{
+	return acc + curr;
+})
+
+console.log(sum);
+
+------------------------------------------------
+
+polyfill of map: // Array.map((num,i,arr)=> {})
+
+Array.prototype.myMap = function( cb ){
+	let temp = [];
+	for(let i = 0; i < this.length; i++){
+		temp.push(cb(this[i],i,this));
+	}
+	return temp;
+}
+
+polyfill of filter: // Array.filter((num,i,arr)=> {})
+
+
+Array.prototype.myMap = function( cb ){
+	let temp = [];
+	for(let i = 0; i < this.length; i++){
+		if(cb(this[i],i,this)) temp.push(cb(this[i],i,this));
+	}
+	return temp;
+}
+
+polyfill of reduce: // Array.reduce((acc,curr,i,arr)=> {},initaial value)
+
+Array.prototype.myReduce = function( cb, initialValue){
+	var accumulator = initialValue;
+
+	for( let i=0; this.length; i++){
+		accumulator = accumulator ? cb(accummulator, this[i], i, this) : this[i];
+	}
+	return accumulator;
+}
+
+------------------------------------------------
+
+first class function:
+
+function square(num){
+	return num * num;
+}
+
+function displaySquare(fn){
+	console.log("Square is:",fn(5));
+}
+displaySquare(square);
+
+------------------------------------------------
+
+(function square(num){
+	console.log(num*num);
+})(5);
+
+------------------------------------
+
+let user = {
+	username: "Rocky",
+	rc1:()=>{
+		console.log(this.username);
+	},
+	rc2(){
+	console.log(this.username);
+	}
+};
+
+user.rc1(); // undefine
+user.rc2(); // Rocky
+
+-------------------------------------
+clouser:
+
+function find(index){
+	let a = [];
+	for(let i = 0; i < 100000; i++){
+		a[i] = i * i;
+	}
+	console.log(a[index]);
+
+
+	return function(index){
+		console.log(a[index])
+	}
+}
+
+const clouser = find();
+clouser(6)
+
+-------------------------------------
+
+var module = (function(){
+	function privateMethod(){
+		console.log("Private";)
+	}
+
+	return {
+		publicMethod: function(){
+			console.log("public")
+		},
+	};
+})();
+
+module.publicMethod(); // public
+module.privateMethod() // not function
+
+----------------------------------
+
+Memoize:
+
+function myMemoize(fn, context){
+	const res = {};
+	return function (...args){
+		var argsCache = JSON.stringify(args);
+		if(!res[argsCache]){
+			res[argsCache] = fn.call(context || this, ...args);
+		}
+		return res[argsCache];
+	};
+}
+
+const product = (num1,num2) => {
+	for ( let i =1; i<= 1000000 ; i++){}
+	return num1 * num2;
+}
+
+const memoized = myMemoize(product);
+
+--------------------------------------
+function sum(a,b,c){
+	return a+b+c;
+}
+
+currying: sum(5)(6)(7)
+
+function sum(a){
+	return function(b){
+		return function(c){
+			return a + b + c;
+		}
+	}
+}
+console.log(sum(2)(6)(1)); // 9
+-------------------------------------
+
+function evaluate(operation){
+	return function(b){
+		return function(c){
+			if (operation === "sum") return a + b;
+			else if(operation === "multiply") return a * b;
+			else if(operation === "divide") return a / b;
+			else if(operation === "substract") return a - b;
+			else return "Invalid Operation";
+		};
+	};
+}
+
+const mul = evaluate("multiply")
+console.log(mul(2)(5)); // 10
+
+---------------------------------------
+Infinite currying:
+
+function add(a){
+	return function(b){
+	if (b) return add( a + b);
+	return a;
+	}
+}
+
+console.log(add(5)(4)(6)(7)) 
+
+-------------------------------
+
+Normal function to curry function:
+
+function curry(func){
+	return function curriedFunc(...args){
+		if(args.lenth >= func.length){
+			return func(...args);
+		} else {
+			return function (...next){
+				return curriedFunc(...args, ...next);
+			};
+		}
+	};
+}
+
+const sum = (a, b, c, d) => a+ b+ c+ d;
+
+const totalsum = curry(sum);
+
+console.log(totalsum(1)(2)(3)(4));
+
+---------------------------------
+
+const func = (function(a){
+	delete a;
+	return a;
+})(5);
+
+console.log(func); // 5
+
+--------------------------
+
+let num = {
+	a: 100,
+	b: 200,
+	title: "My Nums"
+}
+
+multiplyByTwo(num);
+
+function multiplyByTwo(obj){
+	for(key in obj){
+		if(typeof obj[key] === "number"){
+			obj[key] *= 2;
+		}
+	}
+}
+
+console.log(num;)
+
+-----------------------------
+
+const a ={};
+const b ={key: "b"};
+const c = {key: "c"};
+
+a[b] = 123;
+a[c] = 456;
+
+console.log(a); //456 as objects are stored in [object Object] form in the key
+
+-------------------------------
+
+const set = {
+	user: "JS",
+	level: 20,
+	health: 90
+};
+
+const data = JSON.stringify(set, ["level","health"]);
+
+console.log(data); // {"level":20,"health":90}
+
+-------------------------------
+
+const shape = {
+	radius: 10,
+	diameter(){
+	return this.radius * 2; // current obj
+	},
+	perimeter: () => 2 * Math.PI * this.radius //window
+}
+
+console.log(shape.diameter()); // 20
+console.log(shape.perimeter()); //NaN
+
+-------------------------------
+
+let user = {
+	name : "JS",
+	age: 25,
+	fullName:{
+		fname: "Javascript",
+		lName: "ECMA"
+	},
+};
+
+const { fullName : { fname},} = user;
+const { name: myname } = user;
+console.log(fname)
+
+-------------------------------
+Rest & Spread Operator:
+
+function getItems(fruits, favoriteFruit, ...args){
+	return [...fruits, ...args, favouriteFruit]
+}
+
+getItems(["banana", "apple"], "pear", "orange");
+
+-----------------------------
+let person = {name: "JS"};
+const member = [person];
+person = null; // no effect
+//person.name = null; // TypeError: Cannot set properties of null (setting 'name')
+
+console.log(member); // [ { name: 'JS' } ]
+
+----------------------------
+
+const value = { number: 10};
+
+const multiply = (x = { ...value}) => {
+	console.log((x.number *= 2));
+}
+
+multiply(); // 20
+multiply(); // 20
+multiply(value); // 20
+multiply(value); // 40
+
+---------------------------------
+
+const user = {
+	fname : "Sabir",
+	getName(){
+		const fname : "Azam";
+		return this.fname;
+	}
+}
+
+console.log(user.getName()); // Sabir
+console.log(user.getName.call({fname: "Azam"})); // Azam
+
+
+---------------------------------
+
+function makeuser(){
+	return{
+		name: "John",
+		ref: this
+	}
+
+	
+	return{
+		name: "John",
+		ref(){
+            console.log(this) ; // {name: 'John', ref: ƒ, ref1: ƒ}
+			return this
+		},
+		ref1: ()=>{
+            console.log(this) ; // window object
+			return this
+		}
+	}
+}
+
+let user = makeUser();
+
+console.log(user.ref.name) ; // window object // empty // undefined
+
+console.log(user.ref().name); // john
+
+---------------------------------
+
+const user = {
+	name: "Javascript",
+	logMessage(){
+		console.log(this.name); // empty
+	}
+}
+
+setTimeout(user.logMessage, 1000);
+// When setTimeout executes this function, it loses its original context and 
+this becomes the global object (window in browsers), rather than the user object.
+ fix:
+
+setTimeout(function (){user.logMessage(); }, 1000);
+(setTimeout(() => user.logMessage(), 1000))
+(setTimeout(user.logMessage.bind(user), 1000))
+
+const obj = {
+    name: "Object",
+    greet() {
+        console.log(`Hello, ${this.name}`);
+    }
+};
+
+const greetFunc = obj.greet;
+greetFunc(); // Hello, undefined
+
+// Fix:
+const boundGreet = obj.greet.bind(obj);
+boundGreet(); // Hello, Object
+
+---------------------------------
+
+let cal = {
+	read(){
+		this.a = +prompt("a= ", 0);
+		this.b = +prompt("b = ", 0);
+	},
+	sum(){
+		return this.a + this.b;
+	},
+
+	mul(){
+		return this.a * this.b;
+	}
+};
+
+cal.read(); // {a: 5, b: 10}
+console.log(cal.sum()); // 15
+console.log(cal.mul()); // 50
+---------------------------------
+
+var length = 4;
+// global.length = 4;
+function callback(){
+	console.log(this.length);
+}
+
+const obj = {
+	length: 5,
+	method(fn){
+		fn();
+	},
+	method1(fn){
+		fn.call(this); // Would print 5
+	}
+};
+
+obj.method(callback); // undefined // window object
+// obj.method(callback.bind(obj)); // 5
+//While var length = 4 creates a global variable, accessing it via this.length 
+// doesn't work the same way in Node.js as it would in a browser environment.
+
+---------------------------------
+
+
+var length = 4;
+
+function callback(){
+	console.log(this.length);
+}
+
+const obj = {
+	length: 5,
+	method(){
+		arguments[0](); // [callback,3,4]
+	},
+};
+
+object.method(callback,2,3); //3
+
+---------------------------------
+
+Chain multiple function call:
+
+const calc = {
+	total: 0,
+	add: function(a){
+		this.total +=a;
+		return this;
+	},
+	multiply(a){
+		this.total *= a;
+		return this;
+	},
+	subtract(a){
+		this.total -= a;
+		return this;
+	}
+};
+
+const result = calc.add(10).multiply(5).subtract(30).add(10);
+
+console.log(result); // 30
+
+
+---------------------------------
+
+call:
+
+ var obj = { name: "Sabir"};
+
+ function sayHello(){
+ 	return "Hello" + this.name ;
+ }
+
+console.log(sayHello); // Hello
+
+ function sayHello(age){
+ 	return "Hello" + this.name + "is" + age;
+ }
+
+console.log(sayHello.call(obj ,24)); // Hello Sabir is 24
+
+apply:
+
+var obj = { name: "Sabir"};
+
+ function sayHello(age, profession){
+ 	return "Hello" + this.name + "is" + age;
+ }
+
+console.log(sayHello.apply(obj ,[24,  software Engineer])); // Hello Sabir is 24
+
+bind:
+
+var obj = { name: "Sabir"};
+
+ function sayHello(age, profession){
+ 	return "Hello" + this.name + "is" + age;
+ }
+const bindFunc = sayHello.bind(obj);
+
+console.log(bindFunc(24, "Software Er"));
+console.log(bindFunc(29, "Youtuber"));
+
+---------------------------------
+
+const person = { name: 'Piyush' };
+
+function sayHi(age) {
+  return `${this.name} is ${age} years`;
+}
+
+console.log(sayHi.call(person, 24)); ---1?
+console.log(sayHi.bind(person, 24)); ---2?
+
+------------------------
+
+const age = 10;
+var person = {
+    name: "Piyush",
+  age: 20,
+  getAge: function(){
+    return this.age;
+  }
+}
+
+var person2 = {age:  24};
+person.getAge.call(person2); // 24: 	`	show with apply and bind as well
+
+
+---------------------------------
+
+var status = '😎';
+
+setTimeout(() => {
+  const status = '😍';
+
+  const data = {
+    status: '🥑',
+    getStatus() {
+      return this.status;
+    },
+  };
+
+  console.log(data.getStatus()); ---1?
+  console.log(data.getStatus.call(this)); ---2?
+}, 0);
+
+----------------------------------
+
+const arr = ["a","b"];
+const elem = [0,1,2];
+
+arr.push.apply(arr,elem);
+
+console.log(arr);
+
+----------------------------------
+
+function f(){
+	console.log(this.name);
+}
+
+f = f.bind({name: "john"}).bind({name: "doe"});
+f1 = f.bind({name: "john"})
+f2 = f1.bind({name: "doe"}); // f1 is already bound with john permanently, so f2 will have no effect
+
+f1(); // john
+
+----------------------------------
+
+polifill for call:
+
+Function.prototype.myCall = function(context = {}, ...args){
+	
+	if (typeof this !== "function"){
+		throw new Error(this + "Its not Callable");
+	}
+
+	context.fn = this;
+	context.fn(...args);
+}
+
+----------------------------------
+
+polifill for apply:
+
+Function.prototype.myApply = function(context = {}, args = []){
+	
+	if (typeof this !== "function"){
+		throw new Error(this + "Its not Callable");
+	}
+
+	if(!Array.isArray(args)){
+		throw new TypeError("CreateListFromArrayLike called on non object")
+	}
+	context.fn = this;
+	context.fn(...args);
+}
+
+----------------------------------
+
+polifill for bind:
+
+Function.prototype.myBind = function(context = {}, ...args){
+	
+	if (typeof this !== "function"){
+		throw new Error(this + "cannot be bound as Its not Callable");
+	}
+
+	context.fn = this;
+	return function(...newArgs){
+		return comtext.fn(...args, ...newArgs);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

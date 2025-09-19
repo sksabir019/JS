@@ -1,0 +1,1 @@
+console.log(("B" + "A" + +"A" + "A").toLowerCase()); // "banana"
