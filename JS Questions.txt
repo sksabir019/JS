@@ -1,3 +1,77 @@
+Object {}: Keys must be strings or Symbols. Numbers are automatically converted to strings.
+Map: Keys can be any type - objects, functions, primitives, even other Maps.
+// Object - keys become strings
+const obj = {};
+obj[1] = 'one';
+obj['1'] = 'also one'; // overwrites the previous value
+console.log(Object.keys(obj)); // ['1']
+
+// Map - keys preserve type
+const map = new Map();
+map.set(1, 'number one');
+map.set('1', 'string one');
+console.log(map.size); // 2 - different keys!
+
+Object: No direct size property, need Object.keys(obj).length
+Map: Has .size property
+const obj = { a: 1, b: 2 };
+console.log(Object.keys(obj).length); // 2
+
+const map = new Map([['a', 1], ['b', 2]]);
+console.log(map.size); // 2
+
+Object: Not directly iterable (need Object.keys(), Object.entries())
+Map: Directly iterable and maintains insertion order
+// Object
+for (const key in obj) { /* ... */ }
+for (const [key, value] of Object.entries(obj)) { /* ... */ }
+
+// Map
+for (const [key, value] of map) { /* ... */ }
+map.forEach((value, key) => { /* ... */ });
+
+Object: Optimized for property access, slower for frequent additions/deletions
+Map: Better performance for frequent additions and deletions
+Object: Has default keys from Object.prototype
+Map: No default keys
+const obj = {};
+console.log(obj.toString); // function (inherited)
+
+
+-------------------------------------------------
+
+// diff between for of and for in loop
+// for of loop is used to iterate over the values of an iterable object (like arrays, strings, etc.)
+// example:
+const arr = [10, 20, 30];
+for (const value of arr) {
+    console.log(value); // Outputs: 10, then 20, then 30
+    // log index also
+    console.log(arr.indexOf(value)); // Outputs: 0, then 1, then 2
+}
+
+for (const char of "hello") {
+    console.log(char); // Outputs: h, then e, then l, then l, then o
+}
+// for in loop is used to iterate over the enumerable properties of an object (like keys in an object)
+// example:
+const obj = { a: 1, b: 2, c: 3 };
+for (const key in obj) {
+    console.log(key, obj[key]); // Outputs: a 1, b 2, c 3
+}
+// for in loop can also be used with arrays, but it iterates over the indices (keys) of the array
+const array = [10, 20, 30];
+for (const index in array) {
+    console.log(index, array[index]); // Outputs: 0 10, 1 20, 2 30
+}
+// However, using for in with arrays is generally discouraged because it can lead to unexpected results, 
+// especially if the array has additional properties or methods added to it. 
+// It's better to use for of or traditional for loops for arrays.
+
+--------------------------------------------------
+const map = new Map();
+console.log(map.get('toString')); // undefined
+---------------------------------------------------
 console.log(2 + '2'); // 22
 console.log(2 - '2'); // 0
 ---------------------------------------------------
