@@ -1,0 +1,37 @@
+
+version: '3.8'
+services:
+  mysqldb:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "userinfo"
+    container_name: mysqldb
+    networks:
+      - my-network
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  mypythonapp:
+    build: .
+    container_name: mypyapp
+    networks:
+      - my-network
+    volumes:
+      - ./servers.txt:/myapp/servers.txt:ro
+    depends_on:
+      - mysqldb
+    stdin_open: true
+    tty: true
+
+networks:
+  my-network:
+    driver: bridge
+
+
+
+
